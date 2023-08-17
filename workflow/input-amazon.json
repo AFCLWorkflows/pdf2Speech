@@ -1,0 +1,16 @@
+{
+  "inputFile": "sample.pdf",
+  "sourceLanguage": "de-DE",
+  "targetLanguage": "en-US",
+
+  "inputBucket": "",
+  "splitBucket": "",
+  "extractBucket": "",
+  "translateBucket": "",
+  "synthesizeBucket": "",
+  "outputBucket": "",
+
+  "extractProvider": "AWS",
+  "translateProvider": "AWS",
+  "synthesizeProvider": "AWS"
+}

@@ -1,0 +1,21 @@
+{
+  "inputFile": "sample.pdf",
+  "sourceLanguage": "de-DE",
+  "targetLanguage": "en-US",
+
+  "inputBucket": "",
+  "splitBucket": "",
+  "extractBucket1": "",
+  "extractBucket2": "",
+  "translateBucket1": "",
+  "translateBucket2": "",
+  "synthesizeBucket": "",
+  "outputBucket": "",
+
+  "extractProvider1": "GCP",
+  "translateProvider1": "GCP",
+  "synthesizeProvider1": "GCP",
+  "extractProvider2": "AWS",
+  "translateProvider2": "AWS",
+  "synthesizeProvider2": "AWS"
+}
