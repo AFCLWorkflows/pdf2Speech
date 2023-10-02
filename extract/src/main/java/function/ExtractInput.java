@@ -12,4 +12,5 @@ public class ExtractInput {
     private String inputFile;
     private String outputBucket;
     private String provider;
+    private String region;
 }

@@ -47,12 +47,26 @@ public class ExtractFunction implements HttpFunction, RequestHandler<ExtractInpu
         OcrRequest request = OcrRequest.builder()
                 .inputFile(input.getInputFile())
                 .build();
-        OcrResponse response = ocrService.extract(request, Provider.valueOf(input.getProvider()));
+        OcrResponse response = ocrService.extract(request, Provider.valueOf(input.getProvider()), input.getRegion());
         // write result to output bucket
         Storage storage = new StorageImpl(Credentials.loadDefaultCredentials());
         storage.write(response.getText().getBytes(), outputFile);
         // return response
         return ExtractOutput.builder().outputFile(outputFile).build();
+    }
+
+    public static void main(String[] args) throws Exception {
+        ExtractInput input =
+                ExtractInput.builder()
+                        .inputFile(
+                                "https://storage.cloud.google.com/baassimless-test/sample-25.pdf")
+                        .outputBucket("https://storage.cloud.google.com/baassimless-test/")
+                        .provider("GCP")
+                        .region("asia")
+                        .build();
+        var function = new ExtractFunction();
+        var output = function.doWork(input);
+        System.out.println(output);
     }
 
 }
