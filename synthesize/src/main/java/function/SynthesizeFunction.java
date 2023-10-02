@@ -61,7 +61,7 @@ public class SynthesizeFunction
                         .language(input.getLanguage())
                         .build();
         SpeechSynthesisResponse response =
-                synthesizer.synthesizeSpeech(request, Provider.valueOf(input.getProvider()));
+                synthesizer.synthesizeSpeech(request, Provider.valueOf(input.getProvider()), input.getRegion());
         // convert pcm to wav
         byte[] wav = pcmToWav(response.getAudio(), 16000, 16, 1);
         // write result to output bucket

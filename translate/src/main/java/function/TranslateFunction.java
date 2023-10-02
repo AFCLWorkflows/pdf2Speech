@@ -51,7 +51,7 @@ public class TranslateFunction
                         .language(input.getLanguage())
                         .build();
         TranslateResponse response =
-                translateService.translate(request, Provider.valueOf(input.getProvider()));
+                translateService.translate(request, Provider.valueOf(input.getProvider()), input.getRegion());
         // write result to output bucket
         Storage storage = new StorageImpl(Credentials.loadDefaultCredentials());
         storage.write(response.getText().getBytes(), outputFile);
