@@ -37,6 +37,15 @@ dataIns:
 - name: "synthesizeProvider"
   type: "string"
   source: "synthesizeProvider"
+- name: "extractRegion"
+  type: "string"
+  source: "extractRegion"
+- name: "translateRegion"
+  type: "string"
+  source: "translateRegion"
+- name: "synthesizeRegion"
+  type: "string"
+  source: "synthesizeRegion"
 workflowBody:
 - function:
     name: "split"
@@ -122,6 +131,24 @@ workflowBody:
         constraints:
           - name: "distribution"
             value: "REPLICATE(*)"
+      - name: "extractRegion"
+        type: "string"
+        source: "ReadForMe/extractRegion"
+        constraints:
+          - name: "distribution"
+            value: "REPLICATE(*)"
+      - name: "translateRegion"
+        type: "string"
+        source: "ReadForMe/translateRegion"
+        constraints:
+          - name: "distribution"
+            value: "REPLICATE(*)"
+      - name: "synthesizeProvider"
+        type: "string"
+        source: "ReadForMe/synthesizeRegion"
+        constraints:
+          - name: "distribution"
+            value: "REPLICATE(*)"
     loopCounter:
       from: "0"
       to: "split/filesCount"
@@ -140,6 +167,9 @@ workflowBody:
             - name: "provider"
               type: "string"
               source: "parallelFor/extractProvider"
+            - name: "region"
+              type: "string"
+              source: "parallelFor/extractRegion"
             - name: "sourceLanguage"
               type: "string"
               source: "parallelFor/sourceLanguage"
@@ -168,6 +198,14 @@ workflowBody:
               type: "string"
               source: "parallelFor/synthesizeProvider"
               passing: true
+            - name: "translateRegion"
+              type: "string"
+              source: "parallelFor/translateRegion"
+              passing: true
+            - name: "synthesizeRegion"
+              type: "string"
+              source: "parallelFor/synthesizeRegion"
+              passing: true
           dataOuts:
             - name: "outputFile"
               type: "string"
@@ -182,6 +220,10 @@ workflowBody:
             - name: "translateProvider"
               type: "string"
             - name: "synthesizeProvider"
+              type: "string"
+            - name: "translateRegion"
+              type: "string"
+            - name: "synthesizeRegion"
               type: "string"
           properties:
             - name: "resource"
@@ -202,6 +244,9 @@ workflowBody:
             - name: "provider"
               type: "string"
               source: "extract/translateProvider"
+            - name: "region"
+              type: "string"
+              source: "extract/translateRegion"
             - name: "targetLanguage"
               type: "string"
               source: "extract/targetLanguage"
@@ -218,6 +263,10 @@ workflowBody:
               type: "string"
               source: "extract/synthesizeProvider"
               passing: true
+            - name: "synthesizeRegion"
+              type: "string"
+              source: "extract/synthesizeRegion"
+              passing: true
           dataOuts:
             - name: "outputFile"
               type: "string"
@@ -228,6 +277,8 @@ workflowBody:
             - name: "outputBucket"
               type: "string"
             - name: "synthesizeProvider"
+              type: "string"
+            - name: "synthesizeRegion"
               type: "string"
           properties:
             - name: "resource"
@@ -248,6 +299,9 @@ workflowBody:
             - name: "outputBucket"
               type: "string"
               source: "translate/synthesizeBucket"
+            - name: "region"
+              type: "string"
+              source: "translate/synthesizeRegion"
           dataOuts:
             - name: "outputFile"
               type: "string"
